@@ -11,3 +11,8 @@ function clearA() {
   var list = document.getElementById('list');
   list.innerHTML = ''
 }
+
+function addItems(items) {
+  // work here
+  console.log(items);
+}

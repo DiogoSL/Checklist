@@ -3,6 +3,18 @@
   <title>Checklist</title>
   <link rel="stylesheet" type="text/css" href="css/css.css" />
   <script src="js/js.js"></script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      var items = [
+        'Escovar os dentes',
+        'Arrumar a cama',
+        'Preparar a sentinela',
+        'Arrumar a pasta do campo',
+      ];
+
+      addItems(items);
+    };
+  </script>
 </head>
 <body style="background-color:powderblue;">
   <input id="userinput"size="35"align="center" placeholder="What do you want to remember?"type="text"></input>
