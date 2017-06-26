@@ -1,17 +1,16 @@
 <html>
 <head>
   <title>Checklist</title>
-  <link rel="stylesheet" type="text/css" href="css/css.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/css.css" />
+  <script src="js/js.js"></script>
 </head>
-<body>
-  <div>
-  <input height="100px"width="200px" placeholder="What do you want to remember?"type="text"></input>
-  </div>
-  <button id="submit" value="submit">Add</button>
-  <ul>
+<body style="background-color:powderblue;">
+  <input id="userinput"size="35"align="center" placeholder="What do you want to remember?"type="text"></input>
+  <button onclick="submit()">Add</button>
+  <button onclick="clearA()">Clear</button>
+  <ul id="list">
     <li>Go to the toilet</li>
     <li>Eat something</li>
-
   </ul>
 </body>
 </html>
