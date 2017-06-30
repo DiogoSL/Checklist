@@ -1,31 +1,26 @@
 <?php
 require_once './lib/setup.php';
-$_SESSION['error_1'] = null;
-$_SESSION['error_2'] = null;
+
+$action = null;
 $taskName = null;
+$errors = [];
 
-if (isset($_POST['taskName'])) {
-  $taskName = $_POST['taskName'];
+if (isset($_POST['action'])) {
+  $action = $_POST['action'];
+} elseif (isset($_GET['action'])) {
+  $action = $_GET['action'];
 }
-
-$greeting = 'yes';
 
 if (!isset($_SESSION['tasks'])) {
   $_SESSION['tasks'] = [];
 }
 
-if ($taskName !== null) {
-  foreach ($_SESSION["tasks"] as $task){
-    if($_POST["taskName"]==$task){
-      $_SESSION['error_1'] = true;
-    }
+if ($action == 'addTask') {
+  require_once 'actions/add_task.php';
+}
 
-  }
-  if ($_POST['taskName'] == '') {
-    $_SESSION['error_2'] = true;
-  }
-  $_SESSION['tasks'][] = $taskName;
-
+if ($action == 'deleteTask') {
+  require_once 'actions/delete_task.php';
 }
 
 $tasks = $_SESSION['tasks'];
@@ -42,31 +37,28 @@ $tasks = $_SESSION['tasks'];
 
 <body style="background-color:powderblue;">
 
-  <?php if ($greeting == 'yes') : ?>
-    <p>Ola tudo bem</p>
-  <?php endif; ?>
   <div>
     <?php var_dump($_SESSION); ?>
     <?php var_dump($_POST); ?>
+    <?php var_dump($_GET); ?>
   </div>
   <form action="" method="post">
+    <input type="hidden" name="action" value="addTask">
     <input name="taskName" id="userinput" size="35" align="center" value="" placeholder="What do you want to remember?" type="text"></input>
 
     <button type="submit">Salvar</button>
   </form>
-  <?php if ($_SESSION['error_1'] == true): ?>
-  <p>You alredy have this task!</p>
-  <?php endif;
-  if ($_SESSION['error_2'] == true): ?>
-  <p>Please dont leave it empty</p>
-  <?php endif; ?>
+
+  <?php foreach($errors as $error) : ?>
+    <p><?php echo $error ?></p>
+  <?php endforeach; ?>
 
   <button onclick="submit()">Add</button>
   <button onclick="clearA()">Clear</button>
   <ul id="list">
     <?php foreach ($tasks as $task): ?>
       <li>
-        <?php echo protect($task) ?>
+        <?php echo protect($task) ?>&nbsp;<a href="?action=deleteTask&taskName=<?php echo urlencode($task) ?>">Remove</a>
       </li>
     <?php endforeach ;?>
   </ul>

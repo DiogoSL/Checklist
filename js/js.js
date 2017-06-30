@@ -7,6 +7,8 @@ function submit() {
 }
 
 
+
+
 function clearA() {
   var list = document.getElementById('list');
   list.innerHTML = ''
