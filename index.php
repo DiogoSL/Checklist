@@ -23,6 +23,10 @@ if ($action == 'deleteTask') {
   require_once 'actions/delete_task.php';
 }
 
+if ($action == 'deleteAllTasks') {
+  require_once 'actions/delete_all_tasks.php';
+}
+
 $tasks = $_SESSION['tasks'];
 
 ?>
@@ -53,8 +57,7 @@ $tasks = $_SESSION['tasks'];
     <p><?php echo $error ?></p>
   <?php endforeach; ?>
 
-  <button onclick="submit()">Add</button>
-  <button onclick="clearA()">Clear</button>
+<a href="?action=deleteAllTasks">Delete all tasks</a>
   <ul id="list">
     <?php foreach ($tasks as $task): ?>
       <li>
